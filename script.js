@@ -44,3 +44,29 @@ document.querySelector('.scroll-cta')?.addEventListener('click', e => {
   e.preventDefault();
   document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' });
 });
+
+// --- Lightbox for member photos ---
+function openLightbox(src, name, role) {
+  const lb    = document.getElementById('lightbox');
+  const img   = document.getElementById('lightboxImg');
+  const lbName = document.getElementById('lightboxName');
+  const lbRole = document.getElementById('lightboxRole');
+
+  img.src      = src;
+  img.alt      = name;
+  lbName.textContent = name;
+  lbRole.textContent = role;
+
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
