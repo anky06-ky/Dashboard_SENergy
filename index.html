@@ -12,6 +12,17 @@
 </head>
 <body>
 
+  <!-- ===== TOP NAV (desktop only) ===== -->
+  <nav class="top-nav">
+    <div class="tn-brand">BGC<span>.</span></div>
+    <div class="tn-links">
+      <a href="#about">Dự án</a>
+      <a href="#products">Sản phẩm</a>
+      <a href="#passport">Passport</a>
+      <a href="#team">Đội ngũ</a>
+    </div>
+  </nav>
+
   <!-- ===== HERO ===== -->
   <section class="hero" id="home">
     <div class="hero-bg">
@@ -89,11 +100,13 @@
       <div class="sec-label reveal">VỀ DỰ ÁN</div>
       <h2 class="sec-title reveal">BGC là gì?</h2>
 
-      <p class="about-lead reveal">
-        <strong>BIO-GRAPH CIRCULAR (BGC)</strong> là hệ sinh thái kinh tế tuần hoàn đầu tiên tại Việt Nam kết hợp sản phẩm sinh học cao cấp với nền tảng dữ liệu minh bạch — giúp doanh nghiệp SMEs vượt qua rào cản Thuế Carbon CBAM khi xuất khẩu vào EU.
-      </p>
+      <div class="about-2col">
+        <p class="about-lead reveal">
+          <strong>BIO-GRAPH CIRCULAR (BGC)</strong> là hệ sinh thái kinh tế tuần hoàn đầu tiên tại Việt Nam kết hợp sản phẩm sinh học cao cấp với nền tảng dữ liệu minh bạch — giúp doanh nghiệp SMEs vượt qua rào cản Thuế Carbon CBAM khi xuất khẩu vào EU.
+        </p>
 
-      <div class="pillars reveal">
+        <div>
+          <div class="pillars reveal">
         <div class="pillar">
           <div class="pillar-icon">🌿</div>
           <h3>Sản phẩm Sinh học</h3>
@@ -109,22 +122,24 @@
           <h3>Hộ chiếu Xanh</h3>
           <p>QR Code gắn mỗi sản phẩm — khách hàng và nhà quản lý EU đều có thể xác minh.</p>
         </div>
-      </div>
+          </div>
 
-      <div class="esg-strip reveal">
-        <div class="esg-item">
-          <div class="esg-num" style="color:#10b981">40%</div>
-          <div class="esg-lbl">🌱 Environment</div>
-        </div>
-        <div class="esg-sep"></div>
-        <div class="esg-item">
-          <div class="esg-num" style="color:#6366f1">40%</div>
-          <div class="esg-lbl">🛡️ Governance</div>
-        </div>
-        <div class="esg-sep"></div>
-        <div class="esg-item">
-          <div class="esg-num" style="color:#f59e0b">20%</div>
-          <div class="esg-lbl">🤝 Social</div>
+          <div class="esg-strip reveal">
+            <div class="esg-item">
+              <div class="esg-num" style="color:#10b981">40%</div>
+              <div class="esg-lbl">🌱 Environment</div>
+            </div>
+            <div class="esg-sep"></div>
+            <div class="esg-item">
+              <div class="esg-num" style="color:#6366f1">40%</div>
+              <div class="esg-lbl">🛡️ Governance</div>
+            </div>
+            <div class="esg-sep"></div>
+            <div class="esg-item">
+              <div class="esg-num" style="color:#f59e0b">20%</div>
+              <div class="esg-lbl">🤝 Social</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -204,7 +219,8 @@
       <h2 class="sec-title reveal">Hộ chiếu Xanh</h2>
       <p class="sec-sub reveal">Mỗi sản phẩm BGC mang một định danh kỹ thuật số — minh bạch từ ruộng đến tay bạn.</p>
 
-      <div class="passport-visual reveal">
+      <div class="passport-layout">
+        <div class="passport-visual reveal">
         <div class="passport-card">
           <div class="pc-header">
             <div class="pc-logo">BGC<span>.</span></div>
@@ -270,8 +286,9 @@
           </div>
         </div>
       </div>
+        </div>
 
-      <div class="tech-stack reveal">
+        <div class="tech-stack reveal">
         <div class="tech-item">
           <div class="tech-icon">📱</div>
           <div class="tech-name">App Nông Dân Số</div>
@@ -295,7 +312,7 @@
           <div class="tech-name">Green Passport</div>
           <div class="tech-desc">QR + ESG Report chuẩn EU CBAM</div>
         </div>
-      </div>
+      </div><!-- /passport-layout -->
     </div>
   </section>
 
