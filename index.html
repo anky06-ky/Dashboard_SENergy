@@ -1,851 +1,392 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BGC – Bio-Graph Circular | SENergy Dashboard</title>
-    <meta name="description" content="BIO-GRAPH CIRCULAR – Hệ sinh thái kinh tế tuần hoàn dựa trên dữ liệu sinh học. Green Passport, Carbon Tracking, Neo4j Graph.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BGC · BIO-GRAPH CIRCULAR – SENergy</title>
+  <meta name="description" content="BIO-GRAPH CIRCULAR – Hệ sinh thái tuần hoàn tích hợp dữ liệu và dược mỹ phẩm từ Sen & Lục bình. Nhóm SENergy, ĐH Văn Lang.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ===== BACKGROUND LAYERS ===== -->
-<canvas id="bgCanvas"></canvas>
-<div class="data-stream-bg" id="dataStream"></div>
-
-<!-- ===== NAV ===== -->
-<nav class="nav" id="mainNav">
-    <div class="nav-inner">
-        <div class="nav-logo">
-            <div class="nav-logo-icon">
-                <svg viewBox="0 0 36 36" fill="none">
-                    <circle cx="18" cy="18" r="17" stroke="url(#navGrad)" stroke-width="1.5"/>
-                    <path d="M18 8 C14 12 10 16 12 22 C14 28 22 28 24 22 C26 16 22 12 18 8Z" fill="url(#petalNav)" opacity="0.9"/>
-                    <circle cx="18" cy="22" r="3" fill="#f59e0b" opacity="0.9"/>
-                    <defs>
-                        <linearGradient id="navGrad" x1="0" y1="0" x2="36" y2="36">
-                            <stop offset="0%" stop-color="#10b981"/>
-                            <stop offset="100%" stop-color="#f472b6"/>
-                        </linearGradient>
-                        <radialGradient id="petalNav" cx="50%" cy="30%" r="70%">
-                            <stop offset="0%" stop-color="#fce7f3"/>
-                            <stop offset="100%" stop-color="#f472b6"/>
-                        </radialGradient>
-                    </defs>
-                </svg>
-            </div>
-            <span class="nav-brand">BGC<span class="nav-dot">.</span></span>
-        </div>
-        <div class="nav-links">
-            <a href="#dashboard" class="nav-link active" data-section="0">Dashboard</a>
-            <a href="#graph" class="nav-link" data-section="1">Living Graph</a>
-            <a href="#passport" class="nav-link" data-section="2">Green Passport</a>
-            <a href="#map" class="nav-link" data-section="3">Field Map</a>
-            <a href="#team" class="nav-link" data-section="4">SENergy</a>
-        </div>
-        <div class="nav-status">
-            <span class="status-dot"></span>
-            <span class="status-text">LIVE DATA</span>
-        </div>
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-orb orb1"></div>
+      <div class="hero-orb orb2"></div>
+      <div class="hero-orb orb3"></div>
     </div>
-</nav>
+    <div class="hero-content">
+      <div class="logo-wrap reveal">
+        <svg class="logo-svg" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="38" stroke="url(#lg1)" stroke-width="1.5"/>
+          <!-- Lotus petals -->
+          <g transform="translate(40,42)">
+            <path d="M0,-4 C-6,-18 -16,-28 -14,-30 C-12,-32 -4,-22 0,-10 C4,-22 12,-32 14,-30 C16,-28 6,-18 0,-4Z" fill="url(#pg1)" opacity="0.85" transform="rotate(-50)"/>
+            <path d="M0,-4 C-6,-18 -16,-28 -14,-30 C-12,-32 -4,-22 0,-10 C4,-22 12,-32 14,-30 C16,-28 6,-18 0,-4Z" fill="url(#pg1)" opacity="0.85" transform="rotate(50)"/>
+            <path d="M0,-3 C-5,-14 -12,-22 -11,-24 C-9,-26 -3,-18 0,-8 C3,-18 9,-26 11,-24 C12,-22 5,-14 0,-3Z" fill="url(#pg2)" transform="rotate(-22)"/>
+            <path d="M0,-3 C-5,-14 -12,-22 -11,-24 C-9,-26 -3,-18 0,-8 C3,-18 9,-26 11,-24 C12,-22 5,-14 0,-3Z" fill="url(#pg2)" transform="rotate(22)"/>
+            <path d="M0,-3 C-5,-14 -12,-22 -11,-24 C-9,-26 -3,-18 0,-8 C3,-18 9,-26 11,-24 C12,-22 5,-14 0,-3Z" fill="url(#pg3)" transform="rotate(0)"/>
+            <circle r="5" cy="-1" fill="url(#cg1)"/>
+          </g>
+          <defs>
+            <linearGradient id="lg1" x1="0" y1="0" x2="80" y2="80">
+              <stop offset="0%" stop-color="#10b981"/>
+              <stop offset="100%" stop-color="#f472b6"/>
+            </linearGradient>
+            <radialGradient id="pg1" cx="50%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#fce7f3"/>
+              <stop offset="100%" stop-color="#ec4899"/>
+            </radialGradient>
+            <radialGradient id="pg2" cx="50%" cy="25%" r="65%">
+              <stop offset="0%" stop-color="#fff"/>
+              <stop offset="100%" stop-color="#f472b6"/>
+            </radialGradient>
+            <radialGradient id="pg3" cx="50%" cy="20%" r="60%">
+              <stop offset="0%" stop-color="#fff"/>
+              <stop offset="100%" stop-color="#fce7f3"/>
+            </radialGradient>
+            <radialGradient id="cg1" cx="50%" cy="40%" r="50%">
+              <stop offset="0%" stop-color="#fef3c7"/>
+              <stop offset="100%" stop-color="#f59e0b"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
 
-<!-- ========== SECTION 1: DASHBOARD ========== -->
-<section class="section s-dashboard" id="dashboard">
-    <div class="parallax-leaf leaf-1">🌿</div>
-    <div class="parallax-leaf leaf-2">🪷</div>
-    <div class="parallax-leaf leaf-3">🌿</div>
+      <p class="hero-sup reveal">CUỘC THI KHỞI NGHIỆP RA KHƠI 2026 · ĐH VĂN LANG</p>
 
+      <h1 class="hero-title reveal">
+        <span class="ht-green">BIO-GRAPH</span><br>
+        <span class="ht-pink">CIRCULAR</span>
+      </h1>
+
+      <p class="hero-slogan reveal">
+        <em>"Không chỉ bán mỹ phẩm —<br>chúng ta bán <strong>niềm tin dựa trên dữ liệu</strong>."</em>
+      </p>
+
+      <a href="#about" class="scroll-cta reveal">
+        <span>Khám phá</span>
+        <span class="cta-arrow">↓</span>
+      </a>
+    </div>
+
+    <nav class="dot-nav" id="dotNav">
+      <a href="#home"     class="dot active" title="Trang chủ"></a>
+      <a href="#about"    class="dot" title="Dự án"></a>
+      <a href="#products" class="dot" title="Sản phẩm"></a>
+      <a href="#passport" class="dot" title="Green Passport"></a>
+      <a href="#team"     class="dot" title="Đội ngũ"></a>
+    </nav>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section" id="about">
     <div class="container">
-        <div class="hero-block">
-            <div class="hero-badge animate-in" style="--d:0s">
-                <span class="badge-pulse"></span>
-                <span>CUỘC THI KHỞI NGHIỆP RA KHƠI 2026 · VĂN LANG</span>
-            </div>
-            <h1 class="hero-title animate-in" style="--d:0.15s">
-                <span class="hero-title-line t-green">BIO-GRAPH</span>
-                <span class="hero-title-line t-pink">CIRCULAR</span>
-            </h1>
-            <p class="hero-slogan animate-in" style="--d:0.3s">
-                <span class="mono-text">"</span>Không chỉ bán mỹ phẩm — chúng ta bán <strong>niềm tin dựa trên dữ liệu</strong>.<span class="mono-text">"</span>
-            </p>
-            <div class="hero-cta animate-in" style="--d:0.45s">
-                <a href="#graph" class="btn btn-primary">
-                    <span class="btn-icon">⬡</span> Khám phá Living Graph
-                </a>
-                <a href="#passport" class="btn btn-ghost">
-                    <span class="btn-icon">◈</span> Xem Green Passport
-                </a>
-            </div>
-        </div>
+      <div class="sec-label reveal">VỀ DỰ ÁN</div>
+      <h2 class="sec-title reveal">BGC là gì?</h2>
 
-        <!-- KPI Cards -->
-        <div class="kpi-grid animate-in" style="--d:0.6s">
-            <div class="kpi-card">
-                <div class="kpi-icon kpi-icon-green">CO₂</div>
-                <div class="kpi-value" data-target="2847" data-suffix="kg">0 kg</div>
-                <div class="kpi-label">Carbon đã tiết kiệm</div>
-                <div class="kpi-trend up">↑ 18% so với Q2</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon kpi-icon-pink">🪷</div>
-                <div class="kpi-value" data-target="142" data-suffix=" lô">0 lô</div>
-                <div class="kpi-label">Lô hàng đã truy xuất</div>
-                <div class="kpi-trend up">↑ 34% tuần này</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon kpi-icon-blue">⬡</div>
-                <div class="kpi-value" data-target="98" data-suffix="%">0%</div>
-                <div class="kpi-label">Độ chính xác dữ liệu</div>
-                <div class="kpi-trend stable">● ISO 17025 verified</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon kpi-icon-gold">🌐</div>
-                <div class="kpi-value" data-target="5" data-suffix=" thị trường">0</div>
-                <div class="kpi-label">Thị trường mục tiêu</div>
-                <div class="kpi-trend up">↑ EU CBAM Ready</div>
-            </div>
-        </div>
+      <p class="about-lead reveal">
+        <strong>BIO-GRAPH CIRCULAR (BGC)</strong> là hệ sinh thái kinh tế tuần hoàn đầu tiên tại Việt Nam kết hợp sản phẩm sinh học cao cấp với nền tảng dữ liệu minh bạch — giúp doanh nghiệp SMEs vượt qua rào cản Thuế Carbon CBAM khi xuất khẩu vào EU.
+      </p>
 
-        <!-- ESG Ring Chart -->
-        <div class="esg-section animate-in" style="--d:0.8s">
-            <div class="esg-chart-wrap">
-                <svg class="esg-rings" viewBox="0 0 220 220">
-                    <circle class="ring-bg" cx="110" cy="110" r="90" stroke="#1a2a1a" stroke-width="18" fill="none"/>
-                    <circle class="ring-env" cx="110" cy="110" r="90" stroke="url(#gEnv)" stroke-width="18" fill="none"
-                        stroke-dasharray="226 565" stroke-dashoffset="141" stroke-linecap="round"/>
-                    <circle class="ring-bg2" cx="110" cy="110" r="68" stroke="#1a1a2a" stroke-width="16" fill="none"/>
-                    <circle class="ring-soc" cx="110" cy="110" r="68" stroke="url(#gSoc)" stroke-width="16" fill="none"
-                        stroke-dasharray="85 427" stroke-dashoffset="107" stroke-linecap="round"/>
-                    <circle class="ring-bg3" cx="110" cy="110" r="47" stroke="#1a1a1a" stroke-width="14" fill="none"/>
-                    <circle class="ring-gov" cx="110" cy="110" r="47" stroke="url(#gGov)" stroke-width="14" fill="none"
-                        stroke-dasharray="118 295" stroke-dashoffset="74" stroke-linecap="round"/>
-                    <text x="110" y="105" class="esg-center-label" text-anchor="middle">ESG</text>
-                    <text x="110" y="125" class="esg-center-sub" text-anchor="middle">Score</text>
-                    <defs>
-                        <linearGradient id="gEnv" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#10b981"/>
-                            <stop offset="100%" stop-color="#059669"/>
-                        </linearGradient>
-                        <linearGradient id="gSoc" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#6366f1"/>
-                            <stop offset="100%" stop-color="#8b5cf6"/>
-                        </linearGradient>
-                        <linearGradient id="gGov" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#f59e0b"/>
-                            <stop offset="100%" stop-color="#d97706"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <div class="esg-legend">
-                    <div class="esg-item">
-                        <span class="esg-dot" style="background:#10b981"></span>
-                        <span class="esg-name">Environment</span>
-                        <span class="esg-pct">40%</span>
-                    </div>
-                    <div class="esg-item">
-                        <span class="esg-dot" style="background:#6366f1"></span>
-                        <span class="esg-name">Governance</span>
-                        <span class="esg-pct">40%</span>
-                    </div>
-                    <div class="esg-item">
-                        <span class="esg-dot" style="background:#f59e0b"></span>
-                        <span class="esg-name">Social</span>
-                        <span class="esg-pct">20%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pipeline -->
-            <div class="pipeline-wrap">
-                <h3 class="section-label">Luồng Hệ Thống BGC</h3>
-                <div class="pipeline">
-                    <div class="pipe-node active">
-                        <div class="pipe-icon">📱</div>
-                        <div class="pipe-name">App Nông Dân</div>
-                        <div class="pipe-sub">Flutter</div>
-                    </div>
-                    <div class="pipe-arrow">
-                        <div class="pipe-flow"></div>
-                    </div>
-                    <div class="pipe-node">
-                        <div class="pipe-icon">⚡</div>
-                        <div class="pipe-name">FastAPI</div>
-                        <div class="pipe-sub">Backend</div>
-                    </div>
-                    <div class="pipe-arrow">
-                        <div class="pipe-flow"></div>
-                    </div>
-                    <div class="pipe-node">
-                        <div class="pipe-icon">⬡</div>
-                        <div class="pipe-name">Neo4j Graph</div>
-                        <div class="pipe-sub">Database</div>
-                    </div>
-                    <div class="pipe-arrow">
-                        <div class="pipe-flow"></div>
-                    </div>
-                    <div class="pipe-node">
-                        <div class="pipe-icon">🧠</div>
-                        <div class="pipe-name">AI Engine</div>
-                        <div class="pipe-sub">Carbon Calc</div>
-                    </div>
-                    <div class="pipe-arrow">
-                        <div class="pipe-flow"></div>
-                    </div>
-                    <div class="pipe-node">
-                        <div class="pipe-icon">📜</div>
-                        <div class="pipe-name">Green Passport</div>
-                        <div class="pipe-sub">QR + ESG</div>
-                    </div>
-                </div>
-            </div>
+      <div class="pillars reveal">
+        <div class="pillar">
+          <div class="pillar-icon">🌿</div>
+          <h3>Sản phẩm Sinh học</h3>
+          <p>Mỹ phẩm VELA từ Sen & TPCN LUCine từ Lục bình — sạch từ gốc.</p>
         </div>
-
-        <!-- Product Showcase -->
-        <div class="products-showcase animate-in" style="--d:1s">
-            <h3 class="section-label">Dòng Sản Phẩm</h3>
-            <div class="product-cards">
-                <div class="product-card lotus-card">
-                    <div class="product-img-wrap">
-                        <img src="img/anh_san_pham.jpg" alt="LotusPure cosmetics" class="product-img">
-                        <div class="product-img-overlay">
-                            <span class="product-tag">VELA</span>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-name">🪷 VELA – Mỹ phẩm từ Sen</h4>
-                        <p class="product-desc">Serum · Nước hoa hồng · Mặt nạ sinh học</p>
-                        <div class="product-tech">Công nghệ Sodium Phytate chelating</div>
-                        <div class="product-badge verified">✓ Đã qua loại Kim loại nặng</div>
-                    </div>
-                </div>
-                <div class="product-card hyacinth-card">
-                    <div class="product-img-wrap">
-                        <img src="img/san_pham1.jpg" alt="Lục bình supplements" class="product-img">
-                        <div class="product-img-overlay">
-                            <span class="product-tag hyacinth-tag">LUCine</span>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-name">🌿 LUCine – TPCN từ Lục bình</h4>
-                        <p class="product-desc">Viên nang · Trà hoà tan hỗ trợ giải độc</p>
-                        <div class="product-tech">Chỉ số kim loại nặng an toàn</div>
-                        <div class="product-badge partner">★ Đối tác: Traphaco</div>
-                    </div>
-                </div>
-                <div class="product-card data-card">
-                    <div class="product-img-wrap data-img-wrap">
-                        <div class="data-visual">
-                            <div class="data-hex">⬡</div>
-                            <div class="data-lines">
-                                <div class="d-line"></div>
-                                <div class="d-line"></div>
-                                <div class="d-line"></div>
-                            </div>
-                        </div>
-                        <div class="product-img-overlay">
-                            <span class="product-tag data-tag">BGC DATA</span>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h4 class="product-name">📊 Nền tảng Dữ liệu</h4>
-                        <p class="product-desc">Green Passport · Carbon MRV · ESG Report</p>
-                        <div class="product-tech">B2B SaaS cho doanh nghiệp xuất khẩu</div>
-                        <div class="product-badge eu">🌐 EU CBAM Compliant</div>
-                    </div>
-                </div>
-            </div>
+        <div class="pillar">
+          <div class="pillar-icon">⬡</div>
+          <h3>Dữ liệu Đồ thị</h3>
+          <p>Neo4j Graph Database — truy xuất nguồn gốc từng lô hàng chính xác tuyệt đối.</p>
         </div>
+        <div class="pillar">
+          <div class="pillar-icon">🌍</div>
+          <h3>Hộ chiếu Xanh</h3>
+          <p>QR Code gắn mỗi sản phẩm — khách hàng và nhà quản lý EU đều có thể xác minh.</p>
+        </div>
+      </div>
+
+      <div class="esg-strip reveal">
+        <div class="esg-item">
+          <div class="esg-num" style="color:#10b981">40%</div>
+          <div class="esg-lbl">🌱 Environment</div>
+        </div>
+        <div class="esg-sep"></div>
+        <div class="esg-item">
+          <div class="esg-num" style="color:#6366f1">40%</div>
+          <div class="esg-lbl">🛡️ Governance</div>
+        </div>
+        <div class="esg-sep"></div>
+        <div class="esg-item">
+          <div class="esg-num" style="color:#f59e0b">20%</div>
+          <div class="esg-lbl">🤝 Social</div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- ========== SECTION 2: LIVING GRAPH ========== -->
-<section class="section s-graph" id="graph">
+  <!-- ===== PRODUCTS ===== -->
+  <section class="section section-alt" id="products">
     <div class="container">
-        <div class="section-header animate-in" style="--d:0s">
-            <div class="section-tag">MODULE 02</div>
-            <h2 class="section-title">
-                <span class="t-green">The Living</span> <span class="t-white">Graph</span>
-            </h2>
-            <p class="section-subtitle">
-                Mạng lưới quan hệ Neo4j — bộ não kết nối chuỗi cung ứng từ ruộng đến tay người tiêu dùng
-            </p>
-        </div>
+      <div class="sec-label reveal">SẢN PHẨM</div>
+      <h2 class="sec-title reveal">Chiến lược "Thực vật kép"</h2>
+      <p class="sec-sub reveal">Hai dòng sản phẩm — một hệ sinh thái dữ liệu.</p>
 
-        <div class="graph-arena animate-in" style="--d:0.2s">
-            <div class="graph-controls">
-                <button class="graph-btn active" data-filter="all" id="filterAll">Toàn bộ</button>
-                <button class="graph-btn" data-filter="farmer" id="filterFarmer">Nông dân</button>
-                <button class="graph-btn" data-filter="lab" id="filterLab">Phòng Lab</button>
-                <button class="graph-btn" data-filter="product" id="filterProduct">Sản phẩm</button>
-                <button class="graph-btn" data-filter="carbon" id="filterCarbon">Carbon</button>
-            </div>
-            <canvas id="graphCanvas"></canvas>
-            <div class="graph-info-panel" id="graphInfo">
-                <div class="gip-title">Hover vào Node để xem chi tiết</div>
-                <div class="gip-body">Chọn một node trong mạng lưới để xem thông tin chi tiết về nút đó trong chuỗi cung ứng BGC.</div>
-            </div>
-            <div class="graph-legend">
-                <span class="gl-item"><span class="gl-dot" style="background:#10b981"></span>Farmer/Farm</span>
-                <span class="gl-item"><span class="gl-dot" style="background:#6366f1"></span>Lab</span>
-                <span class="gl-item"><span class="gl-dot" style="background:#f472b6"></span>Product</span>
-                <span class="gl-item"><span class="gl-dot" style="background:#f59e0b"></span>Carbon</span>
-                <span class="gl-item"><span class="gl-dot" style="background:#06b6d4"></span>Passport</span>
-            </div>
+      <!-- VELA -->
+      <div class="product-block reveal">
+        <div class="product-img-side">
+          <img src="img/nguoi_sai_san_pham.jpg" alt="VELA – Mỹ phẩm từ Sen Việt Nam">
+          <div class="product-img-badge">🪷 Sen Việt Nam</div>
         </div>
+        <div class="product-text-side">
+          <div class="product-brand green">VELA</div>
+          <h3 class="product-title">Mỹ phẩm từ Sen</h3>
+          <p class="product-description">
+            Dòng mỹ phẩm cao cấp chiết xuất từ Sen Việt Nam, ứng dụng công nghệ <strong>Sodium Phytate chelating</strong> để loại bỏ hoàn toàn ion kim loại nặng trong nguyên liệu — đạt chuẩn dược mỹ phẩm quốc tế.
+          </p>
+          <div class="product-items">
+            <span>✦ Serum dưỡng da</span>
+            <span>✦ Nước hoa hồng</span>
+            <span>✦ Mặt nạ sinh học</span>
+          </div>
+          <div class="product-tags">
+            <span class="tag tag-green">Vegan</span>
+            <span class="tag tag-green">CGMP-ASEAN</span>
+            <span class="tag tag-green">0 ppm kim loại nặng</span>
+          </div>
+        </div>
+      </div>
 
-        <div class="cypher-block animate-in" style="--d:0.4s">
-            <div class="cypher-header">
-                <span class="cypher-tag">CYPHER QUERY · NEO4J</span>
-                <span class="cypher-blink">●</span>
-            </div>
-            <pre class="cypher-code"><span class="cy-keyword">MATCH</span> (f:Farmer)-[:<span class="cy-rel">OWNS</span>]-&gt;(farm:Farm)
-    -[:<span class="cy-rel">HAS_PLOT</span>]-&gt;(plot:LotusPlot)
-    -[:<span class="cy-rel">RUNS_CYCLE</span>]-&gt;(cycle:CultivationCycle)
-    -[:<span class="cy-rel">PRODUCES</span>]-&gt;(batch:HarvestBatch)
-    -[:<span class="cy-rel">HAS_CARBON</span>]-&gt;(c:CarbonRecord)
-<span class="cy-keyword">WHERE</span> c.co2e_result &lt; <span class="cy-num">15.0</span>
-<span class="cy-keyword">RETURN</span> f.name, farm.location, c.co2e_result
-<span class="cy-keyword">ORDER BY</span> c.co2e_result <span class="cy-keyword">ASC</span>
-<span class="cy-keyword">LIMIT</span> <span class="cy-num">10</span></pre>
-            <div class="cypher-result">
-                <div class="cr-row cr-header">
-                    <span>Nông dân</span><span>Vùng</span><span>CO₂e (kg)</span>
-                </div>
-                <div class="cr-row"><span>Nguyễn Văn A</span><span>Đồng Tháp</span><span class="t-green">8.4</span></div>
-                <div class="cr-row"><span>Trần Thị B</span><span>Long An</span><span class="t-green">9.1</span></div>
-                <div class="cr-row"><span>Lê Văn C</span><span>Đồng Tháp</span><span class="t-green">11.5</span></div>
-                <div class="cr-row"><span>Phạm Thị D</span><span>Tiền Giang</span><span class="t-green">13.2</span></div>
-            </div>
+      <div class="product-divider reveal">· · ·</div>
+
+      <!-- LUCine -->
+      <div class="product-block product-block-rev reveal">
+        <div class="product-img-side">
+          <img src="img/san_pham1.jpg" alt="LUCine – TPCN từ Lục bình">
+          <div class="product-img-badge lucine-badge">🌿 Lục bình</div>
         </div>
+        <div class="product-text-side">
+          <div class="product-brand gold">LUCine</div>
+          <h3 class="product-title">TPCN từ Lục bình</h3>
+          <p class="product-description">
+            Thực phẩm chức năng hỗ trợ giải độc gan, thận, điều hòa hệ tuần hoàn — chiết xuất từ Lục bình (Bèo Nhật Bản) với chỉ số kim loại nặng tự nhiên thấp, an toàn cho tiêu dùng nội địa và xuất khẩu.
+          </p>
+          <div class="product-items">
+            <span>✦ Viên nang 500mg</span>
+            <span>✦ Trà hoà tan</span>
+          </div>
+          <div class="product-tags">
+            <span class="tag tag-gold">Hỗ trợ giải độc</span>
+            <span class="tag tag-gold">Đối tác Traphaco</span>
+            <span class="tag tag-gold">An toàn kiểm nghiệm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product gallery -->
+      <div class="gallery reveal">
+        <div class="gallery-img"><img src="img/anh_san_pham.jpg" alt="Sản phẩm VELA LUCine"></div>
+        <div class="gallery-img"><img src="img/san_pham2.jpg" alt="VELA SENegry"></div>
+        <div class="gallery-img"><img src="img/bao_bi_sen.jpg" alt="Bao bì VELA Sen"></div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- ========== SECTION 3: GREEN PASSPORT ========== -->
-<section class="section s-passport" id="passport">
+  <!-- ===== GREEN PASSPORT ===== -->
+  <section class="section" id="passport">
     <div class="container">
-        <div class="section-header animate-in" style="--d:0s">
-            <div class="section-tag">MODULE 03</div>
-            <h2 class="section-title">
-                <span class="t-green">Green</span> <span class="t-white">Passport</span>
-            </h2>
-            <p class="section-subtitle">
-                Mỗi sản phẩm mang một "Giấy khai sinh số" — minh bạch đa tầng cho thị trường EU
-            </p>
+      <div class="sec-label reveal">CÔNG NGHỆ LÕI</div>
+      <h2 class="sec-title reveal">Hộ chiếu Xanh</h2>
+      <p class="sec-sub reveal">Mỗi sản phẩm BGC mang một định danh kỹ thuật số — minh bạch từ ruộng đến tay bạn.</p>
+
+      <div class="passport-visual reveal">
+        <div class="passport-card">
+          <div class="pc-header">
+            <div class="pc-logo">BGC<span>.</span></div>
+            <div class="pc-verified">
+              <span class="verified-dot"></span> VERIFIED
+            </div>
+          </div>
+          <div class="pc-product">VELA Serum</div>
+          <div class="pc-batch">#VELA-2026-001</div>
+          <div class="pc-rows">
+            <div class="pc-row">
+              <span class="pc-key">🌾 Nguồn gốc</span>
+              <span class="pc-val">Đồng Tháp, Việt Nam</span>
+            </div>
+            <div class="pc-row">
+              <span class="pc-key">🧪 Kiểm nghiệm</span>
+              <span class="pc-val green">ISO 17025 ✓</span>
+            </div>
+            <div class="pc-row">
+              <span class="pc-key">⚗️ Kim loại nặng</span>
+              <span class="pc-val green">0 ppm ✓</span>
+            </div>
+            <div class="pc-row">
+              <span class="pc-key">🌍 CO₂e tiết kiệm</span>
+              <span class="pc-val green">−12.7 kg so với TT</span>
+            </div>
+            <div class="pc-row">
+              <span class="pc-key">📅 Sản xuất</span>
+              <span class="pc-val">2026-03-15</span>
+            </div>
+          </div>
+          <div class="pc-seals">
+            <div class="seal sgs">SGS<br><small>Certified</small></div>
+            <div class="seal tuv">TÜV<br><small>Verified</small></div>
+            <div class="seal cgmp">cGMP<br><small>ASEAN</small></div>
+          </div>
+          <div class="pc-qr">
+            <svg viewBox="0 0 60 60" fill="none">
+              <!-- Simplified QR visual -->
+              <rect x="2" y="2" width="24" height="24" rx="3" stroke="#10b981" stroke-width="1.5" fill="none"/>
+              <rect x="7" y="7" width="14" height="14" fill="#10b981" opacity="0.3"/>
+              <rect x="10" y="10" width="8" height="8" fill="#10b981"/>
+              <rect x="34" y="2" width="24" height="24" rx="3" stroke="#10b981" stroke-width="1.5" fill="none"/>
+              <rect x="39" y="7" width="14" height="14" fill="#10b981" opacity="0.3"/>
+              <rect x="42" y="10" width="8" height="8" fill="#10b981"/>
+              <rect x="2" y="34" width="24" height="24" rx="3" stroke="#10b981" stroke-width="1.5" fill="none"/>
+              <rect x="7" y="39" width="14" height="14" fill="#10b981" opacity="0.3"/>
+              <rect x="10" y="42" width="8" height="8" fill="#10b981"/>
+              <!-- data dots -->
+              <rect x="34" y="34" width="4" height="4" fill="#10b981" opacity="0.7"/>
+              <rect x="40" y="34" width="4" height="4" fill="#10b981" opacity="0.7"/>
+              <rect x="46" y="34" width="4" height="4" fill="#10b981" opacity="0.4"/>
+              <rect x="52" y="34" width="4" height="4" fill="#10b981" opacity="0.7"/>
+              <rect x="34" y="40" width="4" height="4" fill="#10b981" opacity="0.4"/>
+              <rect x="46" y="40" width="4" height="4" fill="#10b981" opacity="0.7"/>
+              <rect x="34" y="46" width="4" height="4" fill="#10b981" opacity="0.7"/>
+              <rect x="40" y="46" width="4" height="4" fill="#10b981" opacity="0.4"/>
+              <rect x="52" y="46" width="4" height="4" fill="#10b981" opacity="0.7"/>
+              <rect x="34" y="52" width="4" height="4" fill="#10b981" opacity="0.7"/>
+              <rect x="46" y="52" width="4" height="4" fill="#10b981" opacity="0.7"/>
+              <rect x="52" y="52" width="4" height="4" fill="#10b981" opacity="0.4"/>
+            </svg>
+          </div>
         </div>
+      </div>
 
-        <div class="passport-arena animate-in" style="--d:0.2s">
-            <!-- Phone mockup -->
-            <div class="phone-mockup">
-                <div class="phone-frame">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen" id="phoneScreen">
-                        <!-- State 0: Ready to scan -->
-                        <div class="ps-state ps-ready" id="psReady">
-                            <div class="ps-product-img">
-                                <img src="img/bao_bi_sen.jpg" alt="LotusPure Serum">
-                                <div class="ps-scan-line" id="scanLine"></div>
-                            </div>
-                            <div class="ps-prompt">
-                                <div class="ps-qr-icon">⬜</div>
-                                <p>Đưa camera vào sản phẩm</p>
-                            </div>
-                        </div>
-                        <!-- State 1: Scanning -->
-                        <div class="ps-state ps-scanning" id="psScanning" style="display:none">
-                            <div class="scan-animation">
-                                <div class="scan-ring r1"></div>
-                                <div class="scan-ring r2"></div>
-                                <div class="scan-ring r3"></div>
-                                <div class="scan-laser"></div>
-                                <div class="scan-icon">◈</div>
-                            </div>
-                            <p class="scan-text">Đang xác thực blockchain...</p>
-                        </div>
-                        <!-- State 2: Result -->
-                        <div class="ps-state ps-result" id="psResult" style="display:none">
-                            <div class="result-seal" id="resultSeal">
-                                <div class="seal-inner">
-                                    <div class="seal-icon">✓</div>
-                                    <div class="seal-text">VERIFIED</div>
-                                </div>
-                            </div>
-                            <div class="result-title">VELA Serum <span class="result-batch">#VELA-2026-001</span></div>
-                            <div class="passport-fields">
-                                <div class="pf-row">
-                                    <span class="pf-key">🌾 Nguồn gốc</span>
-                                    <span class="pf-val">Đồng Tháp, VN</span>
-                                </div>
-                                <div class="pf-row">
-                                    <span class="pf-key">🧪 Kiểm nghiệm</span>
-                                    <span class="pf-val t-green">ISO 17025 ✓</span>
-                                </div>
-                                <div class="pf-row">
-                                    <span class="pf-key">⚗️ Kim loại nặng</span>
-                                    <span class="pf-val t-green">0 ppm ✓</span>
-                                </div>
-                                <div class="pf-row">
-                                    <span class="pf-key">🌍 CO₂e</span>
-                                    <span class="pf-val"><span class="co2-counter" id="co2Counter">0.0</span> kg</span>
-                                </div>
-                                <div class="pf-row">
-                                    <span class="pf-key">📅 Ngày sản xuất</span>
-                                    <span class="pf-val">2026-03-15</span>
-                                </div>
-                            </div>
-                            <div class="result-badges">
-                                <div class="rb-badge sgs-badge">SGS<br><small>Certified</small></div>
-                                <div class="rb-badge tuv-badge">TÜV<br><small>Verified</small></div>
-                                <div class="rb-badge cgmp-badge">cGMP<br><small>ASEAN</small></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Scan controls -->
-            <div class="scan-panel">
-                <h3 class="scan-panel-title">Trình mô phỏng Hộ chiếu Xanh</h3>
-                <p class="scan-panel-desc">Nhấn "Quét QR" để trải nghiệm quy trình xác thực số cho sản phẩm BGC — giống hệt những gì nhà mua hàng EU thực hiện.</p>
-
-                <button class="btn btn-primary scan-trigger" id="scanBtn">
-                    <span class="btn-icon">◈</span> Quét QR Code
-                </button>
-                <button class="btn btn-ghost scan-reset" id="resetBtn" style="display:none">
-                    ↺ Thử lại
-                </button>
-
-                <div class="trust-layers">
-                    <h4 class="tl-title">3 Tầng Tin Cậy BGC</h4>
-                    <div class="tl-item">
-                        <div class="tl-num">01</div>
-                        <div>
-                            <div class="tl-name">Data Integrity</div>
-                            <div class="tl-desc">Timestamp · Audit log · File hash · Role-based access</div>
-                        </div>
-                    </div>
-                    <div class="tl-item">
-                        <div class="tl-num">02</div>
-                        <div>
-                            <div class="tl-name">Method Integrity</div>
-                            <div class="tl-desc">Emission factor có nguồn · Allocation rule minh bạch</div>
-                        </div>
-                    </div>
-                    <div class="tl-item">
-                        <div class="tl-num">03</div>
-                        <div>
-                            <div class="tl-name">External Assurance</div>
-                            <div class="tl-desc">SGS · TÜV · ISO 17025 Lab verification</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="tech-stack reveal">
+        <div class="tech-item">
+          <div class="tech-icon">📱</div>
+          <div class="tech-name">App Nông Dân Số</div>
+          <div class="tech-desc">Flutter · Nhập liệu canh tác offline</div>
         </div>
-
-        <!-- Carbon comparison -->
-        <div class="carbon-compare animate-in" style="--d:0.5s">
-            <h3 class="section-label">So sánh Dấu chân Carbon: BGC vs. Truyền thống</h3>
-            <div class="cc-bars">
-                <div class="cc-item">
-                    <div class="cc-label">Trồng trọt</div>
-                    <div class="cc-track">
-                        <div class="cc-bar bgc-bar" data-w="32">
-                            <span class="cc-val">8.4 kg CO₂e</span>
-                        </div>
-                        <div class="cc-bar trad-bar" data-w="68">
-                            <span class="cc-val trad-val">22.1 kg CO₂e</span>
-                        </div>
-                    </div>
-                    <div class="cc-diff">-62% 🌱</div>
-                </div>
-                <div class="cc-item">
-                    <div class="cc-label">Chiết xuất</div>
-                    <div class="cc-track">
-                        <div class="cc-bar bgc-bar" data-w="28">
-                            <span class="cc-val">3.2 kg CO₂e</span>
-                        </div>
-                        <div class="cc-bar trad-bar" data-w="56">
-                            <span class="cc-val trad-val">11.3 kg CO₂e</span>
-                        </div>
-                    </div>
-                    <div class="cc-diff">-72% 🌱</div>
-                </div>
-                <div class="cc-item">
-                    <div class="cc-label">Đóng gói</div>
-                    <div class="cc-track">
-                        <div class="cc-bar bgc-bar" data-w="18">
-                            <span class="cc-val">1.1 kg CO₂e</span>
-                        </div>
-                        <div class="cc-bar trad-bar" data-w="44">
-                            <span class="cc-val trad-val">6.8 kg CO₂e</span>
-                        </div>
-                    </div>
-                    <div class="cc-diff">-84% 🌱</div>
-                </div>
-            </div>
-            <div class="cc-legend">
-                <span><span class="cc-dot bgc-dot"></span>BGC Tuần hoàn</span>
-                <span><span class="cc-dot trad-dot"></span>Truyền thống</span>
-            </div>
+        <div class="tech-arrow">→</div>
+        <div class="tech-item">
+          <div class="tech-icon">⬡</div>
+          <div class="tech-name">Neo4j Graph DB</div>
+          <div class="tech-desc">Truy xuất quan hệ chuỗi cung ứng</div>
         </div>
+        <div class="tech-arrow">→</div>
+        <div class="tech-item">
+          <div class="tech-icon">🧠</div>
+          <div class="tech-name">AI Carbon Engine</div>
+          <div class="tech-desc">FastAPI · Tính dấu chân CO₂e</div>
+        </div>
+        <div class="tech-arrow">→</div>
+        <div class="tech-item">
+          <div class="tech-icon">📜</div>
+          <div class="tech-name">Green Passport</div>
+          <div class="tech-desc">QR + ESG Report chuẩn EU CBAM</div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- ========== SECTION 4: FIELD MAP ========== -->
-<section class="section s-map" id="map">
+  <!-- ===== TEAM ===== -->
+  <section class="section section-alt" id="team">
     <div class="container">
-        <div class="section-header animate-in" style="--d:0s">
-            <div class="section-tag">MODULE 04</div>
-            <h2 class="section-title">
-                <span class="t-green">Field-to-Cloud</span> <span class="t-white">Map</span>
-            </h2>
-            <p class="section-subtitle">
-                Từ ruộng sen Đồng Tháp đến Dashboard ESG — hành trình số hóa của nông dân Việt
-            </p>
+      <div class="sec-label reveal">ĐỘI NGŨ</div>
+      <h2 class="sec-title reveal">SENergy Team</h2>
+      <p class="sec-sub reveal">Đa nhiệm · Đa chuyên ngành · Một tầm nhìn.</p>
+
+      <div class="team-grid reveal">
+
+        <div class="member-card leader-card">
+          <div class="member-photo">
+            <img src="../QR_Code/img/Trong_Khang.jpg" alt="Nguyễn Phạm Trọng Khang"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="photo-fallback" style="display:none">TK</div>
+          </div>
+          <div class="leader-badge-top">👑 Trưởng nhóm</div>
+          <h4 class="member-name">Nguyễn Phạm Trọng Khang</h4>
+          <p class="member-role">Quản trị Dữ liệu & Chiến lược</p>
+          <p class="member-desc">Thiết kế kiến trúc hệ sinh thái BGC và định hướng phát triển.</p>
         </div>
 
-        <div class="map-arena animate-in" style="--d:0.2s">
-            <div class="map-visual">
-                <svg class="vn-map" viewBox="0 0 300 500" fill="none">
-                    <!-- Vietnam simplified shape -->
-                    <path d="M190 20 L220 35 L240 60 L245 90 L240 120 L230 140 L225 170 L235 200 L240 230 L235 260 L225 290 L215 320 L200 350 L185 380 L170 410 L155 440 L145 470 L140 490 L130 480 L125 460 L130 440 L135 410 L130 380 L120 360 L110 340 L105 310 L110 280 L115 250 L110 220 L105 190 L100 160 L95 130 L90 100 L95 70 L105 50 L120 35 L145 25 Z" 
-                        fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.3)" stroke-width="1.5"/>
-                    <!-- HCMC dot -->
-                    <circle cx="145" cy="380" r="8" fill="#10b981" opacity="0.9" class="map-pulse-dot"/>
-                    <text x="160" y="385" fill="#10b981" font-size="10" font-family="Outfit">TP.HCM</text>
-                    <!-- Dong Thap -->
-                    <circle cx="120" cy="350" r="10" fill="#f472b6" opacity="0.95" class="map-pulse-dot" id="dongThap"/>
-                    <text x="80" y="345" fill="#f472b6" font-size="9" font-family="Outfit">Đồng Tháp</text>
-                    <!-- Long An -->
-                    <circle cx="135" cy="365" r="7" fill="#f59e0b" opacity="0.9" class="map-pulse-dot" id="longAn"/>
-                    <text x="140" y="360" fill="#f59e0b" font-size="8" font-family="Outfit">Long An</text>
-                    <!-- Tien Giang -->
-                    <circle cx="148" cy="373" r="6" fill="#06b6d4" opacity="0.8" class="map-pulse-dot"/>
-                    <text x="155" y="368" fill="#06b6d4" font-size="8" font-family="Outfit">Tiền Giang</text>
-                    <!-- Data lines -->
-                    <line x1="120" y1="350" x2="145" y2="380" stroke="#10b981" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-                    <line x1="135" y1="365" x2="145" y2="380" stroke="#10b981" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-                    <line x1="148" y1="373" x2="145" y2="380" stroke="#10b981" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
-                    <!-- North marker -->
-                    <text x="170" y="40" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Outfit">VIỆT NAM</text>
-                </svg>
-                <!-- Map tooltip -->
-                <div class="map-tooltip" id="mapTooltip" style="display:none">
-                    <div class="mt-title" id="mtTitle">Đồng Tháp</div>
-                    <div class="mt-stat"><span>Diện tích:</span> <span>48 ha</span></div>
-                    <div class="mt-stat"><span>Nông dân:</span> <span>12 hộ</span></div>
-                    <div class="mt-stat"><span>Sản lượng:</span> <span>2.4 tấn/vụ</span></div>
-                    <div class="mt-stat t-green"><span>CO₂e:</span> <span>8.4 kg/kg sp</span></div>
-                </div>
-            </div>
-
-            <div class="map-info">
-                <div class="mi-zones">
-                    <div class="mi-zone active" id="zDongThap">
-                        <div class="miz-header">
-                            <span class="miz-dot" style="background:#f472b6"></span>
-                            <span class="miz-name">Đồng Tháp</span>
-                            <span class="miz-status">Đang hoạt động</span>
-                        </div>
-                        <div class="miz-stats">
-                            <span>48 ha · 12 hộ nông dân</span>
-                        </div>
-                        <div class="miz-product">🪷 Sen · VELA Serum</div>
-                    </div>
-                    <div class="mi-zone" id="zLongAn">
-                        <div class="miz-header">
-                            <span class="miz-dot" style="background:#f59e0b"></span>
-                            <span class="miz-name">Long An</span>
-                            <span class="miz-status">Đang hoạt động</span>
-                        </div>
-                        <div class="miz-stats">
-                            <span>32 ha · 8 hộ nông dân</span>
-                        </div>
-                        <div class="miz-product">🌿 Lục bình · LUCine Capsule</div>
-                    </div>
-                    <div class="mi-zone" id="zTienGiang">
-                        <div class="miz-header">
-                            <span class="miz-dot" style="background:#06b6d4"></span>
-                            <span class="miz-name">Tiền Giang</span>
-                            <span class="miz-status in-progress">Đang mở rộng</span>
-                        </div>
-                        <div class="miz-stats">
-                            <span>21 ha · 5 hộ nông dân</span>
-                        </div>
-                        <div class="miz-product">🌿 Lục bình · LUCine · Sen lai</div>
-                    </div>
-                </div>
-
-                <!-- Farmer App Preview -->
-                <div class="farmer-app">
-                    <div class="fa-header">
-                        <span class="fa-tag">APP "NÔNG DÂN SỐ"</span>
-                        <span class="fa-badge">Flutter · Offline-first</span>
-                    </div>
-                    <div class="fa-screen">
-                        <div class="fa-form">
-                            <div class="fa-field">
-                                <label>📅 Ngày nhập liệu</label>
-                                <div class="fa-input active">2026-04-16</div>
-                            </div>
-                            <div class="fa-field">
-                                <label>💧 Lượng nước tưới (m³)</label>
-                                <div class="fa-input typing" id="typingField">4.2<span class="cursor">|</span></div>
-                            </div>
-                            <div class="fa-field">
-                                <label>🌱 Phân bón hữu cơ (kg)</label>
-                                <div class="fa-input">25</div>
-                            </div>
-                            <div class="fa-field">
-                                <label>⚡ Điện tiêu thụ (kWh)</label>
-                                <div class="fa-input">12.8</div>
-                            </div>
-                            <div class="fa-submit">
-                                <div class="fa-btn">📤 Gửi lên BGC Cloud</div>
-                            </div>
-                            <div class="fa-carbon-preview">
-                                <span class="fcp-label">CO₂e ước tính:</span>
-                                <span class="fcp-val">~10.7 kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="member-card">
+          <div class="member-photo">
+            <img src="../QR_Code/img/Anh_Thinh.jpg" alt="Hoàng Phú Thịnh"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="photo-fallback" style="display:none">PT</div>
+          </div>
+          <h4 class="member-name">Hoàng Phú Thịnh</h4>
+          <p class="member-role">Kinh tế & Vận hành</p>
+          <p class="member-desc">Mô hình tài chính, chuỗi cung ứng tinh gọn.</p>
         </div>
 
-        <!-- Roadmap -->
-        <div class="roadmap animate-in" style="--d:0.5s">
-            <h3 class="section-label">Lộ trình Thực hiện</h3>
-            <div class="rm-track">
-                <div class="rm-item completed">
-                    <div class="rm-dot"></div>
-                    <div class="rm-content">
-                        <div class="rm-time">Q3 2025</div>
-                        <div class="rm-title">Nền tảng R&D</div>
-                        <div class="rm-desc">Hoàn thiện công thức · Dashboard cơ bản</div>
-                    </div>
-                </div>
-                <div class="rm-line"></div>
-                <div class="rm-item active">
-                    <div class="rm-dot"></div>
-                    <div class="rm-content">
-                        <div class="rm-time">Q1 2026</div>
-                        <div class="rm-title">MVP Ra mắt ✦ ĐANG Ở ĐÂY</div>
-                        <div class="rm-desc">Clean Beauty · MOU nông dân Đồng Tháp</div>
-                    </div>
-                </div>
-                <div class="rm-line"></div>
-                <div class="rm-item">
-                    <div class="rm-dot"></div>
-                    <div class="rm-content">
-                        <div class="rm-time">Q4 2026</div>
-                        <div class="rm-title">Xuất khẩu EU</div>
-                        <div class="rm-desc">Chứng nhận bên thứ 3 · CBAM compliant</div>
-                    </div>
-                </div>
-            </div>
+        <div class="member-card">
+          <div class="member-photo">
+            <img src="../QR_Code/img/Chi_Linh.jpg" alt="Đặng Khánh Linh"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="photo-fallback" style="display:none">KL</div>
+          </div>
+          <h4 class="member-name">Đặng Khánh Linh</h4>
+          <p class="member-role">Thị trường & PR</p>
+          <p class="member-desc">Xây dựng thương hiệu VELA, kênh Shopee & TikTok.</p>
         </div>
+
+        <div class="member-card">
+          <div class="member-photo">
+            <img src="../QR_Code/img/Chi_Thu.jpg" alt="Trần Thị Minh Thư"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="photo-fallback" style="display:none">MT</div>
+          </div>
+          <h4 class="member-name">Trần Thị Minh Thư</h4>
+          <p class="member-role">R&D Hóa dược & QC</p>
+          <p class="member-desc">Công nghệ chiết xuất xanh, kiểm soát kim loại nặng.</p>
+        </div>
+
+        <div class="member-card">
+          <div class="member-photo">
+            <img src="../QR_Code/img/An_Ky.jpg" alt="Trần An Kỳ"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="photo-fallback" style="display:none">AK</div>
+          </div>
+          <h4 class="member-name">Trần An Kỳ</h4>
+          <p class="member-role">AI & Hệ thống Dữ liệu</p>
+          <p class="member-desc">Graph Database Neo4j, FastAPI, Carbon AI Engine.</p>
+        </div>
+
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- ========== SECTION 5: TEAM / THANK YOU ========== -->
-<section class="section s-team" id="team">
-    <canvas id="confettiCanvas"></canvas>
-    <div class="parallax-leaf leaf-t1">🌿</div>
-    <div class="parallax-leaf leaf-t2">🪷</div>
-
+  <!-- ===== FOOTER / THANK YOU ===== -->
+  <section class="section footer-section" id="footer">
     <div class="container">
-        <div class="team-hero animate-in" style="--d:0s">
-            <div class="th-badge">
-                <span class="badge-pulse pink"></span>
-                <span>NHÓM SENEGRY · ĐH VĂN LANG</span>
-            </div>
-            <h2 class="th-title">
-                Bộ Não<br>Đứng Sau BGC
-            </h2>
-            <p class="th-quote">
-                "Chúng tôi không quản lý bằng bảng biểu,<br>
-                <strong>chúng tôi quản lý bằng mạng lưới quan hệ thực tế.</strong>"
-            </p>
-        </div>
-
-        <div class="team-grid-full animate-in" style="--d:0.3s">
-            <div class="tmf-card" data-role="leader">
-                <div class="tmf-avatar-wrap">
-                    <div class="tmf-avatar" style="--hue:280">
-                        <img src="../QR_Code/img/Trong_Khang.jpg" alt="Nguyễn Phạm Trọng Khang" onerror="this.style.display='none';this.parentElement.querySelector('.avatar-fallback').style.display='flex'">
-                        <div class="avatar-fallback" style="display:none">TK</div>
-                    </div>
-                    <div class="tmf-role-badge leader-badge">
-                        <span>👑 LEADER</span>
-                    </div>
-                </div>
-                <div class="tmf-info">
-                    <h3 class="tmf-name">Nguyễn Phạm Trọng Khang</h3>
-                    <p class="tmf-role">Quản trị Dữ liệu & Chiến lược</p>
-                    <p class="tmf-desc">Thiết kế cấu trúc hệ sinh thái và định hướng phát triển dài hạn cho BGC.</p>
-                    <div class="tmf-tags">
-                        <span>Data Architect</span>
-                        <span>Strategy</span>
-                        <span>Neo4j</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tmf-card">
-                <div class="tmf-avatar-wrap">
-                    <div class="tmf-avatar" style="--hue:330">
-                        <img src="../QR_Code/img/Anh_Thinh.jpg" alt="Hoàng Phú Thịnh" onerror="this.style.display='none';this.parentElement.querySelector('.avatar-fallback').style.display='flex'">
-                        <div class="avatar-fallback" style="display:none">PT</div>
-                    </div>
-                </div>
-                <div class="tmf-info">
-                    <h3 class="tmf-name">Hoàng Phú Thịnh</h3>
-                    <p class="tmf-role">Kinh tế & Quản trị Vận hành</p>
-                    <p class="tmf-desc">Mô hình tài chính, tối ưu chi phí sản xuất và quản trị chuỗi cung ứng.</p>
-                    <div class="tmf-tags">
-                        <span>Finance</span>
-                        <span>Supply Chain</span>
-                        <span>Lean</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tmf-card">
-                <div class="tmf-avatar-wrap">
-                    <div class="tmf-avatar" style="--hue:200">
-                        <img src="../QR_Code/img/Chi_Linh.jpg" alt="Đặng Khánh Linh" onerror="this.style.display='none';this.parentElement.querySelector('.avatar-fallback').style.display='flex'">
-                        <div class="avatar-fallback" style="display:none">KL</div>
-                    </div>
-                </div>
-                <div class="tmf-info">
-                    <h3 class="tmf-name">Đặng Khánh Linh</h3>
-                    <p class="tmf-role">Chiến lược Thị trường & PR</p>
-                    <p class="tmf-desc">Xây dựng thương hiệu LotusPure, quản lý kênh Shopee, TikTok.</p>
-                    <div class="tmf-tags">
-                        <span>Branding</span>
-                        <span>Marketing</span>
-                        <span>PR</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tmf-card">
-                <div class="tmf-avatar-wrap">
-                    <div class="tmf-avatar" style="--hue:150">
-                        <img src="../QR_Code/img/Chi_Thu.jpg" alt="Trần Thị Minh Thư" onerror="this.style.display='none';this.parentElement.querySelector('.avatar-fallback').style.display='flex'">
-                        <div class="avatar-fallback" style="display:none">MT</div>
-                    </div>
-                </div>
-                <div class="tmf-info">
-                    <h3 class="tmf-name">Trần Thị Minh Thư</h3>
-                    <p class="tmf-role">R&D Hóa dược & Kiểm soát CL</p>
-                    <p class="tmf-desc">Công nghệ chiết xuất xanh, xử lý kim loại nặng và phát triển công thức.</p>
-                    <div class="tmf-tags">
-                        <span>Chemistry</span>
-                        <span>R&D</span>
-                        <span>QC</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tmf-card">
-                <div class="tmf-avatar-wrap">
-                    <div class="tmf-avatar" style="--hue:40">
-                        <img src="../QR_Code/img/An_Ky.jpg" alt="Trần An Kỳ" onerror="this.style.display='none';this.parentElement.querySelector('.avatar-fallback').style.display='flex'">
-                        <div class="avatar-fallback" style="display:none">AK</div>
-                    </div>
-                </div>
-                <div class="tmf-info">
-                    <h3 class="tmf-name">Trần An Kỳ</h3>
-                    <p class="tmf-role">Chuyên gia AI & Hệ thống Dữ liệu</p>
-                    <p class="tmf-desc">Xây dựng Graph Database, Backend FastAPI và thuật toán dự báo Carbon.</p>
-                    <div class="tmf-tags">
-                        <span>AI/ML</span>
-                        <span>FastAPI</span>
-                        <span>Neo4j</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Final thank you block -->
-        <div class="final-block animate-in" style="--d:0.6s">
-            <div class="fb-decoration">
-                <div class="fb-lotus">
-                    <svg viewBox="0 0 120 120" fill="none">
-                        <g transform="translate(60,65)">
-                            <path d="M0,-8 C-14,-38 -32,-58 -30,-62 C-26,-65 -8,-45 0,-20 C8,-45 26,-65 30,-62 C32,-58 14,-38 0,-8Z" fill="url(#ftP1)" opacity="0.8" transform="rotate(-50)"/>
-                            <path d="M0,-8 C-14,-38 -32,-58 -30,-62 C-26,-65 -8,-45 0,-20 C8,-45 26,-65 30,-62 C32,-58 14,-38 0,-8Z" fill="url(#ftP1)" opacity="0.8" transform="rotate(50)"/>
-                            <path d="M0,-6 C-10,-32 -24,-50 -22,-53 C-18,-56 -6,-38 0,-16 C6,-38 18,-56 22,-53 C24,-50 10,-32 0,-6Z" fill="url(#ftP2)" opacity="0.9" transform="rotate(-25)"/>
-                            <path d="M0,-6 C-10,-32 -24,-50 -22,-53 C-18,-56 -6,-38 0,-16 C6,-38 18,-56 22,-53 C24,-50 10,-32 0,-6Z" fill="url(#ftP2)" opacity="0.9" transform="rotate(25)"/>
-                            <path d="M0,-5 C-8,-28 -18,-45 -16,-48 C-13,-50 -4,-34 0,-12 C4,-34 13,-50 16,-48 C18,-45 8,-28 0,-5Z" fill="url(#ftP3)" transform="rotate(0)"/>
-                            <circle r="9" cy="-2" fill="url(#ftCenter)"/>
-                        </g>
-                        <defs>
-                            <radialGradient id="ftP1" cx="50%" cy="30%" r="70%">
-                                <stop offset="0%" stop-color="#fce7f3"/>
-                                <stop offset="100%" stop-color="#ec4899"/>
-                            </radialGradient>
-                            <radialGradient id="ftP2" cx="50%" cy="25%" r="65%">
-                                <stop offset="0%" stop-color="#fff"/>
-                                <stop offset="100%" stop-color="#f472b6"/>
-                            </radialGradient>
-                            <radialGradient id="ftP3" cx="50%" cy="20%" r="60%">
-                                <stop offset="0%" stop-color="#fff"/>
-                                <stop offset="100%" stop-color="#fce7f3"/>
-                            </radialGradient>
-                            <radialGradient id="ftCenter" cx="50%" cy="40%" r="50%">
-                                <stop offset="0%" stop-color="#fef3c7"/>
-                                <stop offset="100%" stop-color="#f59e0b"/>
-                            </radialGradient>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-
-            <h2 class="fb-title">
-                Cảm Ơn<br>Chân Thành
-            </h2>
-            <p class="fb-project">BGC: THE DUAL-BIO SYNERGY</p>
-            <p class="fb-desc">
-                Chúng tôi không chỉ bán sản phẩm —<br>
-                chúng tôi bán <strong>sự minh bạch cho tương lai xanh</strong>.
-            </p>
-
-            <div class="fb-esg">
-                <div class="fb-esg-item">
-                    <span class="fesg-icon">🌱</span>
-                    <span class="fesg-label">Environment</span>
-                    <span class="fesg-pct">40%</span>
-                </div>
-                <div class="fb-esg-item">
-                    <span class="fesg-icon">🤝</span>
-                    <span class="fesg-label">Social</span>
-                    <span class="fesg-pct">20%</span>
-                </div>
-                <div class="fb-esg-item">
-                    <span class="fesg-icon">🛡️</span>
-                    <span class="fesg-label">Governance</span>
-                    <span class="fesg-pct">40%</span>
-                </div>
-            </div>
-
-            <div class="fb-footer">
-                <span class="fb-build">Build Local</span>
-                <span class="fb-sep">·</span>
-                <span class="fb-sustain">Sustain Global</span>
-            </div>
-            <p class="fb-copy">© 2026 BGC: THE DUAL-BIO SYNERGY — Nhóm SENergy, Đại học Văn Lang, TP. HCM, Việt Nam</p>
-
-            <button class="fb-confetti-btn" id="confettiBtn">🎉 Ăn mừng!</button>
-        </div>
+      <div class="footer-lotus reveal">🪷</div>
+      <h2 class="footer-title reveal">Cảm ơn<br>quý vị!</h2>
+      <p class="footer-project reveal">BGC: THE DUAL-BIO SYNERGY</p>
+      <p class="footer-quote reveal">
+        "Chúng tôi không chỉ bán sản phẩm —<br>
+        chúng tôi bán <strong>sự minh bạch cho tương lai xanh</strong>."
+      </p>
+      <div class="footer-badges reveal">
+        <div class="f-badge">🌱 Build Local</div>
+        <div class="f-badge">🌍 Sustain Global</div>
+        <div class="f-badge">🛡️ EU CBAM Ready</div>
+      </div>
+      <p class="footer-copy reveal">© 2026 SENergy · Đại học Văn Lang · TP. Hồ Chí Minh</p>
     </div>
-</section>
+  </section>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
