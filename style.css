@@ -882,7 +882,7 @@ a { text-decoration: none; }
   .dot-nav { right: 1.5rem; }
   .qr-img { width: 240px; height: 240px; }
   .lucine-gallery-img { height: 200px; }
-  .gallery-labeled { grid-template-columns: repeat(5, 1fr); }
+  .gallery-labeled { grid-template-columns: repeat(6, 1fr); }
   .gallery-labeled-img { height: 150px; }
 }
 
