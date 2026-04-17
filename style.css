@@ -1006,3 +1006,111 @@ a { text-decoration: none; }
   letter-spacing: 0.03em;
 }
 
+/* ==================================
+   CONTACT & MENTOR
+   ================================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: border-color 0.25s;
+}
+.contact-card:hover {
+  border-color: rgba(16,185,129,0.3);
+}
+.contact-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  color: rgba(240,253,244,0.8);
+}
+.contact-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+.contact-item a {
+  color: var(--green);
+  transition: color 0.2s;
+}
+.contact-item a:hover {
+  color: var(--pink);
+}
+
+.mentor-card {
+  border-color: rgba(244,114,182,0.2) !important;
+  background: linear-gradient(135deg, var(--card), rgba(244,114,182,0.05));
+}
+.mentor-card:hover {
+  border-color: rgba(244,114,182,0.4) !important;
+}
+.mentor-profile {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.mentor-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(244,114,182,0.4);
+  box-shadow: 0 0 20px rgba(244,114,182,0.15);
+}
+.mentor-degree {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--pink);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.2rem;
+}
+.mentor-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 0.2rem;
+}
+.mentor-role {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+.mentor-email {
+  font-size: 0.8rem;
+  color: var(--green);
+  transition: color 0.2s;
+  display: inline-block;
+}
+.mentor-email:hover {
+  color: var(--pink);
+}
+
+/* Contact responsive */
+@media (min-width: 640px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
