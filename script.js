@@ -45,17 +45,45 @@ document.querySelector('.scroll-cta')?.addEventListener('click', e => {
   document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' });
 });
 
-// --- Lightbox for member photos ---
+// --- Lightbox for member photos (circle mode) ---
 function openLightbox(src, name, role) {
   const lb    = document.getElementById('lightbox');
   const img   = document.getElementById('lightboxImg');
   const lbName = document.getElementById('lightboxName');
   const lbRole = document.getElementById('lightboxRole');
+  const wrap   = document.getElementById('lightboxImgWrap');
+  const inner  = document.getElementById('lightboxInner');
 
   img.src      = src;
   img.alt      = name;
   lbName.textContent = name;
   lbRole.textContent = role;
+
+  // Circle mode for people
+  wrap.classList.remove('lightbox-img-wrap--product');
+  inner.classList.remove('lightbox-inner--product');
+
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+// --- Lightbox for product images (rectangle mode) ---
+function openLightboxProduct(src, name, role) {
+  const lb    = document.getElementById('lightbox');
+  const img   = document.getElementById('lightboxImg');
+  const lbName = document.getElementById('lightboxName');
+  const lbRole = document.getElementById('lightboxRole');
+  const wrap   = document.getElementById('lightboxImgWrap');
+  const inner  = document.getElementById('lightboxInner');
+
+  img.src      = src;
+  img.alt      = name;
+  lbName.textContent = name;
+  lbRole.textContent = role;
+
+  // Rectangle mode for products
+  wrap.classList.add('lightbox-img-wrap--product');
+  inner.classList.add('lightbox-inner--product');
 
   lb.classList.add('active');
   document.body.style.overflow = 'hidden';
